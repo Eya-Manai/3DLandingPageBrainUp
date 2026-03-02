@@ -1,5 +1,6 @@
 import { Chair } from "./Chair.js";
 import { Tree } from "./arbreTree.js";
+import { Lamp } from "./lamp.js";
 
 export class Environment {
   constructor(scene) {
@@ -14,12 +15,20 @@ export class Environment {
     this.objects.push(new Chair(this.scene, 14, 0));
     this.objects.push(new Chair(this.scene, -14, 8));
     this.objects.push(new Chair(this.scene, 14, 8));
+    this.addLamps();
   }
 
   addTrees() {
     for (let i = -30; i < 30; i += 15) {
       this.objects.push(new Tree(this.scene, -27, i + 1));
       this.objects.push(new Tree(this.scene, 27, i + 1));
+    }
+  }
+
+  addLamps() {
+    for (let i = -30; i < 30; i += 10) {
+      new Lamp(this.scene, -5, i);
+      new Lamp(this.scene, 5, i);
     }
   }
 }
