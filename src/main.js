@@ -4,6 +4,7 @@ import { createCamera } from "./core/camera.js";
 import { createScene } from "./core/scene.js";
 import { setUpLight } from "./core/light.js";
 import { Ground } from "./world/ground.js";
+import { School } from "./world/school.js";
 
 const canvas = document.getElementById("school-canvas");
 
@@ -11,6 +12,7 @@ const renderer = createRenderer(canvas);
 const scene = createScene();
 const camera = createCamera();
 const ground = new Ground(scene);
+const school = new School(scene);
 
 setUpLight(scene);
 

@@ -27,7 +27,7 @@ export class Ground {
   buildGrass() {
     const grass = new THREE.Mesh(
       new THREE.PlaneGeometry(200, 200),
-      mat(0x6b8c3e, 0.9),
+      mat(0x00bb77, 0.9),
     );
     grass.rotation.x = -DEG(90);
     grass.receiveShadow = true;
@@ -35,7 +35,7 @@ export class Ground {
   }
   buildWalkway() {
     const walkway = new THREE.Mesh(
-      new THREE.BoxGeometry(10, 0.05, 60),
+      new THREE.BoxGeometry(10, 0.05, 50),
       mat(0xd4c5a0, 0.8),
     );
     walkway.position.set(0, 0.02, 10);
@@ -45,7 +45,7 @@ export class Ground {
   buildWalkWayDashes() {
     const dashGeo = new THREE.BoxGeometry(0.2, 0.06, 0.8);
     const dashMat = mat(0xffffff, 0.7);
-    for (let i = -18; i < 20; i += 3) {
+    for (let i = -13; i < 20; i += 3) {
       const dash = new THREE.Mesh(dashGeo, dashMat);
       dash.position.set(0, 0.03, i);
       this.group.add(dash);
@@ -53,7 +53,7 @@ export class Ground {
   }
   buildSidePatches() {
     const patchGeo = new THREE.PlaneGeometry(30, 40);
-    const patchMat = mat(0x567a2e, 0.9);
+    const patchMat = mat(0xadebb3, 0.9);
     const patchLeft = new THREE.Mesh(patchGeo, patchMat);
     patchLeft.rotation.x = -DEG(90);
     patchLeft.position.set(-18, 0.01, 5);
