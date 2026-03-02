@@ -5,6 +5,7 @@ import { createScene } from "./core/scene.js";
 import { setUpLight } from "./core/light.js";
 import { Ground } from "./world/ground.js";
 import { School } from "./world/school.js";
+import { Environment } from "./world/environement.js";
 
 const canvas = document.getElementById("school-canvas");
 
@@ -13,7 +14,7 @@ const scene = createScene();
 const camera = createCamera();
 const ground = new Ground(scene);
 const school = new School(scene);
-
+new Environment(scene);
 setUpLight(scene);
 
 function animate() {
