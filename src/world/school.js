@@ -38,7 +38,7 @@ export class School {
   buildRoof() {
     const slab = new THREE.Mesh(
       new THREE.BoxGeometry(23, 0.8, 11),
-      mat(0xed80e9, 0.5, 0.1),
+      mat(0x5b7cff, 0.5, 0.1),
     );
     slab.position.y = 9.5;
     slab.castShadow = true;
@@ -46,7 +46,7 @@ export class School {
 
     const peak = new THREE.Mesh(
       new THREE.CylinderGeometry(0, 5, 3, 4),
-      mat(0xed80e9, 0.5, 0.1),
+      mat(0x5b7cff, 0.5, 0.1),
     );
     peak.rotation.y = DEG(45);
     peak.position.y = 11.3;
@@ -89,7 +89,7 @@ export class School {
   buildDoor() {
     const door = new THREE.Mesh(
       new THREE.BoxGeometry(2.2, 3.5, 0.15),
-      mat(0xed80e9, 0.8),
+      mat(0x5b7cff, 0.8),
     );
     door.position.set(0, 1.75, 5.075);
     this.group.add(door);
@@ -212,7 +212,7 @@ export class School {
 
     const roof = new THREE.Mesh(
       new THREE.CylinderGeometry(0, 1.8, 2, 4),
-      mat(0xed80e9, 0.5),
+      mat(0x5b7cff, 0.5),
     );
     roof.rotation.y = DEG(45);
     roof.position.set(0, 15.3, 0);
@@ -306,7 +306,7 @@ export class School {
 
       const roof = new THREE.Mesh(
         new THREE.BoxGeometry(6.5, 0.5, 8.5),
-        mat(0xed80e9, 0.5, 0.1),
+        mat(0x5b7cff, 0.5, 0.1),
       );
       roof.position.set(side * 14, 7.25, 0);
       roof.castShadow = true;
