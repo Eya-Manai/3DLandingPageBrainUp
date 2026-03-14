@@ -19,11 +19,15 @@ new Environment(scene);
 setUpLight(scene);
 
 const mascot = new Mascot(scene);
-mascot.setPosition(0, 0, 14);
+
+async function init() {
+  await mascot.load();
+
+  animate();
+}
 
 function animate() {
   requestAnimationFrame(animate);
   renderer.render(scene, camera);
 }
-
-animate();
+init();
