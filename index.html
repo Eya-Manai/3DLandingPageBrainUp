@@ -9,44 +9,21 @@
 <body>
 
   <div id="intro-screen">
-
     <canvas id="school-canvas"></canvas>
 
-    <div class="intro-ui">
+    <button id="skip-btn" onclick="window.__goToLanding()">
+      Skip →
+    </button>
+  </div>
 
-      <div class="logo" id="intro-logo">BrainUp</div>
-
-     
-
-
-      <!-- Mascot speech bubble (positioned via JS) -->
-      <div class="speech-bubble hidden" id="speech-bubble">
-        Hey! 👋 Welcome to <strong>BrainUp!</strong><br>
-        Ready to see what we do?
-      </div>
-
-      <!-- Sound toggle -->
-      <button class="sound-btn hidden" id="sound-btn">🔊 Sound On</button>
-
-      <!-- Enter CTA -->
-      <button class="enter-btn hidden" id="enter-btn">
-        Explore the Platform →
-      </button>
-
-      <p class="hint hidden" id="hint">Move your mouse to look around</p>
-
+  <div id="landing-page">
+ 
+    <div class="landing-placeholder">
+      <h1>Welcome to EduSphere</h1>
+      <p>Landing page coming soon...</p>
     </div>
   </div>
 
-  <!-- ═══ LANDING PAGE (hidden until transition) ═══ -->
-  <div id="landing-screen" class="hidden">
-    <!-- Your full landing page HTML goes here -->
-    <nav></nav>
-    <section id="hero"></section>
-    <!-- etc -->
-  </div>
-
-  <!-- Your app entry point -->
   <script type="module" src="src/main.js"></script>
 
 </body>

@@ -9,8 +9,6 @@ import { Environment } from "./world/environement.js";
 import { Mascot } from "./characters/mascot.js";
 import { CharacterController } from "./characters/characterController.js";
 
-// ── Core ──────────────────────────────────────────────────────
-
 const canvas = document.getElementById("school-canvas");
 
 const renderer = createRenderer(canvas);
@@ -19,31 +17,34 @@ renderer.shadowMap.type = THREE.PCFShadowMap;
 const scene = createScene();
 const camera = createCamera();
 
-// ── World ─────────────────────────────────────────────────────
-
 new Ground(scene);
 new School(scene);
 new Environment(scene);
 setUpLight(scene);
 
-// ── Character ─────────────────────────────────────────────────
-
 const mascot = new Mascot(scene);
 const controller = new CharacterController(mascot);
 
-// ── Init ──────────────────────────────────────────────────────
+controller.onDoorEnter(() => {
+  goToLanding();
+});
+
+function goToLanding() {
+  const intro = document.getElementById("intro-screen");
+  const landing = document.getElementById("landing-page");
+
+  intro?.classList.add("fade-out");
+
+  landing?.classList.add("visible");
+}
+
+window.__goToLanding = goToLanding;
 
 async function init() {
   await mascot.load();
-
-  // Place mascot on the path in front of the school.
-  // Adjust X/Z if your scene has different coordinates.
   mascot.group.position.set(0, 0, 6);
-
   animate();
 }
-
-// ── Loop ──────────────────────────────────────────────────────
 
 let lastTime = performance.now();
 
@@ -51,7 +52,7 @@ function animate() {
   requestAnimationFrame(animate);
 
   const now = performance.now();
-  const delta = Math.min((now - lastTime) / 1000, 0.1); // cap at 100ms
+  const delta = Math.min((now - lastTime) / 1000, 0.1);
   lastTime = now;
 
   controller.update(delta);

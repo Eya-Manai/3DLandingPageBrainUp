@@ -4,21 +4,32 @@ export class CharacterController {
   static SPEED = 4;
   static FADE = 0.25;
 
+  static DOOR_X = 0;
+  static DOOR_Z = -2.925;
+  static DOOR_RANGE = 1.8;
+
   #mascot;
   #keys = {};
   #current = "";
   #waving = false;
+
+  #onDoorEnter = null;
+  #doorTriggered = false;
 
   constructor(mascot) {
     this.#mascot = mascot;
     this.#bind();
   }
 
+  onDoorEnter(fn) {
+    this.#onDoorEnter = fn;
+  }
+
   update(delta) {
     if (!this.#mascot.isLoaded) return;
-
     this.#move(delta);
     this.#animate();
+    this.#checkDoor();
   }
 
   #bind() {
@@ -28,7 +39,6 @@ export class CharacterController {
       if (e.code === "KeyE" && !this.#waving) {
         this.#waving = true;
         this.#play("wave");
-
         setTimeout(() => {
           this.#waving = false;
           this.#current = "";
@@ -61,7 +71,6 @@ export class CharacterController {
       pos.x += dx * sp;
       pos.z += dz * sp;
 
-      // ROTATION
       const angle = Math.atan2(dx, dz);
       this.#mascot.group.rotation.y = angle;
     }
@@ -81,7 +90,6 @@ export class CharacterController {
       this.#keys["ArrowRight"];
 
     const target = moving ? "walk" : "idle";
-
     if (target !== this.#current) {
       this.#play(target);
     }
@@ -90,7 +98,6 @@ export class CharacterController {
   #play(name) {
     const next = this.#mascot.actions[name];
     if (!next) return;
-
     if (this.#current === name) return;
 
     const prev = this.#mascot.actions[this.#current];
@@ -104,5 +111,19 @@ export class CharacterController {
     }
 
     this.#current = name;
+  }
+
+  #checkDoor() {
+    if (this.#doorTriggered) return;
+    if (!this.#onDoorEnter) return;
+    const pos = this.#mascot.group.position;
+    const dx = pos.x - CharacterController.DOOR_X;
+    const dz = pos.z - CharacterController.DOOR_Z;
+    const dist = Math.sqrt(dx * dx + dz * dz);
+
+    if (dist < CharacterController.DOOR_RANGE) {
+      this.#doorTriggered = true;
+      this.#onDoorEnter();
+    }
   }
 }
