@@ -1,137 +1,108 @@
-// ─────────────────────────────────────────────────────────────
-//  CharacterController
-//
-//  Owns all input handling, movement, and animation switching.
-//  Mascot only loads — CharacterController drives it.
-//
-//  Usage in main.js:
-//    const controller = new CharacterController(mascot)
-//    // in loop: controller.update(delta)
-// ─────────────────────────────────────────────────────────────
+import * as THREE from "three";
 
 export class CharacterController {
-  // ── Config ───────────────────────────────────────────────────
-  static WALK_SPEED = 0.08; // world units per frame at 60fps
-  static FADE_TIME = 0.25; // animation crossfade seconds
+  static SPEED = 4;
+  static FADE = 0.25;
 
-  // ── State ────────────────────────────────────────────────────
   #mascot;
-  #keys = { up: false, down: false, left: false, right: false };
-  #currentAnim = "";
+  #keys = {};
+  #current = "";
   #waving = false;
 
   constructor(mascot) {
     this.#mascot = mascot;
-    this.#bindInput();
+    this.#bind();
   }
 
-  // ── Call every frame from main.js ────────────────────────────
   update(delta) {
     if (!this.#mascot.isLoaded) return;
 
-    this.#move();
-    this.#updateAnimation();
+    this.#move(delta);
+    this.#animate();
   }
 
-  // ── Input ────────────────────────────────────────────────────
-  #bindInput() {
-    const press = (e) => {
-      if (e.code === "ArrowUp" || e.code === "KeyW") this.#keys.up = true;
-      if (e.code === "ArrowDown" || e.code === "KeyS") this.#keys.down = true;
-      if (e.code === "ArrowLeft" || e.code === "KeyA") this.#keys.left = true;
-      if (e.code === "ArrowRight" || e.code === "KeyD") this.#keys.right = true;
+  #bind() {
+    window.addEventListener("keydown", (e) => {
+      this.#keys[e.code] = true;
 
       if (e.code === "KeyE" && !this.#waving) {
         this.#waving = true;
-        this.#playAnim("wave");
+        this.#play("wave");
+
         setTimeout(() => {
           this.#waving = false;
-          this.#currentAnim = ""; // force re-evaluate on next frame
-        }, 2600);
+          this.#current = "";
+        }, 2500);
       }
-    };
+    });
 
-    const release = (e) => {
-      if (e.code === "ArrowUp" || e.code === "KeyW") this.#keys.up = false;
-      if (e.code === "ArrowDown" || e.code === "KeyS") this.#keys.down = false;
-      if (e.code === "ArrowLeft" || e.code === "KeyA") this.#keys.left = false;
-      if (e.code === "ArrowRight" || e.code === "KeyD")
-        this.#keys.right = false;
-    };
-
-    window.addEventListener("keydown", press);
-    window.addEventListener("keyup", release);
+    window.addEventListener("keyup", (e) => {
+      this.#keys[e.code] = false;
+    });
   }
 
-  // ── Movement ─────────────────────────────────────────────────
-  #move() {
-    const sp = CharacterController.WALK_SPEED;
+  #move(delta) {
+    const sp = CharacterController.SPEED * delta;
+    const pos = this.#mascot.group.position;
 
-    if (this.#keys.up) this.#mascot.group.position.z -= sp;
-    if (this.#keys.down) this.#mascot.group.position.z += sp;
+    let dx = 0,
+      dz = 0;
 
-    if (this.#keys.left) {
-      this.#mascot.group.position.x -= sp;
-      this.#mascot.setFacingDirection(-1);
-    }
-    if (this.#keys.right) {
-      this.#mascot.group.position.x += sp;
-      this.#mascot.setFacingDirection(1);
+    if (this.#keys["KeyW"] || this.#keys["ArrowUp"]) dz -= 1;
+    if (this.#keys["KeyS"] || this.#keys["ArrowDown"]) dz += 1;
+    if (this.#keys["KeyA"] || this.#keys["ArrowLeft"]) dx -= 1;
+    if (this.#keys["KeyD"] || this.#keys["ArrowRight"]) dx += 1;
+
+    if (dx || dz) {
+      const len = Math.hypot(dx, dz);
+      dx /= len;
+      dz /= len;
+
+      pos.x += dx * sp;
+      pos.z += dz * sp;
+
+      // ROTATION
+      const angle = Math.atan2(dx, dz);
+      this.#mascot.group.rotation.y = angle;
     }
   }
 
-  // ── Animation switching ───────────────────────────────────────
-  #updateAnimation() {
+  #animate() {
     if (this.#waving) return;
 
     const moving =
-      this.#keys.up || this.#keys.down || this.#keys.left || this.#keys.right;
+      this.#keys["KeyW"] ||
+      this.#keys["KeyS"] ||
+      this.#keys["KeyA"] ||
+      this.#keys["KeyD"] ||
+      this.#keys["ArrowUp"] ||
+      this.#keys["ArrowDown"] ||
+      this.#keys["ArrowLeft"] ||
+      this.#keys["ArrowRight"];
 
     const target = moving ? "walk" : "idle";
-    if (target !== this.#currentAnim) {
-      this.#playAnim(target);
+
+    if (target !== this.#current) {
+      this.#play(target);
     }
   }
 
-  // ── Cross-fade between clips ──────────────────────────────────
-  //
-  //  The animation was "hidden" because of how Three.js blending works:
-  //  if you call fadeIn() on a new action without also explicitly
-  //  setting its weight and enabling it, the mixer keeps running
-  //  the old action at weight 1.0 and the new one never surfaces.
-  //
-  //  Correct pattern for cross-fading with pre-armed actions:
-  //    1. Set incoming weight to 0
-  //    2. Enable it
-  //    3. reset() — rewind to t=0
-  //    4. fadeIn() — ramps weight from 0 → 1 over fadeTime
-  //    5. fadeOut() on the outgoing — ramps its weight 1 → 0
-  //
-  #playAnim(name) {
-    const actions = this.#mascot.actions;
-    const next = actions[name];
+  #play(name) {
+    const next = this.#mascot.actions[name];
+    if (!next) return;
 
-    if (!next) {
-      console.warn(`[Controller] No action "${name}"`);
-      return;
-    }
+    if (this.#current === name) return;
 
-    const prev = actions[this.#currentAnim];
-    const fade = CharacterController.FADE_TIME;
+    const prev = this.#mascot.actions[this.#current];
 
-    // Prepare incoming action
+    next.reset();
     next.enabled = true;
-    next.setEffectiveTimeScale(1);
-    next.setEffectiveWeight(1);
-    next.time = 0;
-    next.fadeIn(fade);
+    next.play();
 
-    // Fade out previous action
-    if (prev && prev !== next) {
-      prev.fadeOut(fade);
+    if (prev) {
+      prev.crossFadeTo(next, CharacterController.FADE, true);
     }
 
-    this.#currentAnim = name;
-    console.log(`[Controller] → "${name}"`);
+    this.#current = name;
   }
 }
