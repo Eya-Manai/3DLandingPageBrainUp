@@ -6,7 +6,7 @@ export class CharacterController {
 
   static DOOR_X = 0;
   static DOOR_Z = -2.925;
-  static DOOR_RANGE = 1.8;
+  static DOOR_RANGE = 4;
 
   #mascot;
   #keys = {};
@@ -144,8 +144,11 @@ export class CharacterController {
     const dx = pos.x - CharacterController.DOOR_X;
     const dz = pos.z - CharacterController.DOOR_Z;
     const dist = Math.sqrt(dx * dx + dz * dz);
+    console.log("Distance to door:", dist.toFixed(2));
 
     if (dist < CharacterController.DOOR_RANGE) {
+      console.log("Door triggered!");
+      console.log("Door triggered!");
       this.#doorTriggered = true;
       this.#onDoorEnter();
     }
