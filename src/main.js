@@ -6,6 +6,8 @@ import { setUpLight } from "./core/light.js";
 import { Ground } from "./world/ground.js";
 import { School } from "./world/school.js";
 import { Environment } from "./world/environement.js";
+import { Sky } from "./world/sky.js";
+
 import { Mascot } from "./characters/mascot.js";
 import { CharacterController } from "./characters/characterController.js";
 
@@ -16,7 +18,7 @@ renderer.shadowMap.type = THREE.PCFShadowMap;
 
 const scene = createScene();
 const camera = createCamera();
-
+const sky = new Sky(scene);
 new Ground(scene);
 new School(scene);
 new Environment(scene);
@@ -108,6 +110,7 @@ function animate() {
 
   controller.update(delta);
   mascot.update(delta);
+  sky.update(delta);
   updateDialogPosition();
 
   renderer.render(scene, camera);
