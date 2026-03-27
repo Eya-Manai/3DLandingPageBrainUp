@@ -75,10 +75,7 @@ export class CharacterController {
       this.#mascot.group.rotation.y = angle;
     }
   }
-
   #animate() {
-    if (this.#waving) return;
-
     const moving =
       this.#keys["KeyW"] ||
       this.#keys["KeyS"] ||
@@ -89,9 +86,22 @@ export class CharacterController {
       this.#keys["ArrowLeft"] ||
       this.#keys["ArrowRight"];
 
-    const target = moving ? "walk" : "idle";
-    if (target !== this.#current) {
-      this.#play(target);
+    if (moving) {
+      if (this.#waving) {
+        this.#waving = false;
+      }
+
+      if (this.#current !== "walk") {
+        this.#play("walk");
+      }
+
+      return;
+    }
+
+    if (this.#waving) return;
+
+    if (this.#current !== "idle") {
+      this.#play("idle");
     }
   }
 
@@ -104,15 +114,28 @@ export class CharacterController {
 
     next.reset();
     next.enabled = true;
+    next.setEffectiveWeight(1);
+    next.setEffectiveTimeScale(1);
+    next.fadeIn(CharacterController.FADE);
     next.play();
 
     if (prev) {
-      prev.crossFadeTo(next, CharacterController.FADE, true);
+      prev.fadeOut(CharacterController.FADE);
     }
 
     this.#current = name;
   }
+  playWaveIntro() {
+    this.#waving = true;
+    this.#play("wave");
 
+    setTimeout(() => {
+      if (this.#waving) {
+        this.#waving = false;
+        this.#play("idle");
+      }
+    }, 5000);
+  }
   #checkDoor() {
     if (this.#doorTriggered) return;
     if (!this.#onDoorEnter) return;

@@ -29,6 +29,21 @@ controller.onDoorEnter(() => {
   goToLanding();
 });
 
+function showIntroDialog() {
+  const dialog = document.getElementById("intro-dialog");
+  if (!dialog) return;
+
+  dialog.classList.remove("hidden");
+
+  requestAnimationFrame(() => {
+    dialog.classList.add("visible");
+  });
+
+  setTimeout(() => {
+    dialog.classList.remove("visible");
+  }, 5000);
+}
+
 function goToLanding() {
   const intro = document.getElementById("intro-screen");
   const landing = document.getElementById("landing-page");
@@ -60,6 +75,8 @@ window.__goToLanding = goToLanding;
 async function init() {
   await mascot.load();
   mascot.group.position.set(0, 0, 6);
+  controller.playWaveIntro();
+  showIntroDialog();
   animate();
 }
 
