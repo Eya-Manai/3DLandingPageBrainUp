@@ -3,25 +3,266 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>EduSphere</title>
+  <title>Brain Up</title>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
+  
   <div id="intro-screen">
     <canvas id="school-canvas"></canvas>
 
     <button id="skip-btn" onclick="window.__goToLanding()">
-      Skip →
+      Skip intro →
     </button>
   </div>
 
+
   <div id="landing-page">
- 
-    <div class="landing-placeholder">
-      <h1>Welcome to EduSphere</h1>
-      <p>Landing page coming soon...</p>
+
+    <nav class="l-nav">
+      <div class="l-logo">Brain Up</div>
+      <ul class="l-nav-links">
+        <li><a href="#features">Features</a></li>
+        <li><a href="#roles">For You</a></li>
+        <li><a href="#gamif">Gamification</a></li>
+        <li><a href="#how">How It Works</a></li>
+      </ul>
+      <a href="#cta" class="l-nav-cta">Sign In</a>
+       <a href="#cta" class="l-nav-cta">Sign Up</a>
+    </nav>
+
+    <section class="l-hero">
+      <div class="l-hero-inner">
+        <div>
+          <h1 class="l-h1">
+            <span class="c1">Smarter</span> Schools.<br>
+            <span class="c2">Happier</span> Families.<br>
+            <span class="c3">Brighter</span> Futures.
+          </h1>
+          <p class="l-desc">Connect teachers, students, parents and admins in one joyful platform  gamified learning, real-time grades, instant communication. Built for every child.</p>
+          <div class="l-btns">
+            <a href="#cta" class="btn-p">Start for Free →</a>
+         </a>
+          </div>
+          <div class="l-pills">
+            <div class="lpill">🏫 <strong>500+ Schools</strong></div>
+            <div class="lpill">🎓 <strong>45K Students</strong></div>
+            <div class="lpill">⭐ <strong>4.9 / 5 Rating</strong></div>
+          </div>
+        </div>
+
+        <!-- Floating UI cards -->
+        <div class="l-cards">
+          <div class="lcard lc-a">
+            <div class="clbl">Student progress — Ahmed K.</div>
+            <div class="cval">78% <span class="cvalsub">completed</span></div>
+            <div class="pbar-bg"><div class="pbar-fg" style="width:78%"></div></div>
+            <div class="ctags">
+              <span class="ctag ctag-or">✏️ 3 exercises done</span>
+              <span class="ctag ctag-bl">📚 2 left</span>
+            </div>
+          </div>
+          <div class="lcard lc-b">
+            <div class="clbl">Latest grades</div>
+            <div class="srow">Math <span class="sbadge" style="background:#eef9ee;color:#16a34a">17/20</span></div>
+            <div class="srow">Physics <span class="sbadge" style="background:#fff0e6;color:#F37933">14/20</span></div>
+            <div class="srow">French <span class="sbadge" style="background:#eef4ff;color:#1A8FE3">16/20</span></div>
+          </div>
+          <div class="lcard lc-c">
+            <div class="nrow"><div class="nic" style="background:#fffbec">🏆</div><div><div class="ntitle">New badge unlocked!</div><div class="nsub">Math Star · +250 XP</div></div></div>
+          </div>
+          <div class="lcard lc-d">
+            <div class="nrow"><div class="nic" style="background:#fff0f4">📝</div><div><div class="ntitle">Assignment due</div><div class="nsub">Physics · Friday</div></div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- STATS RIBBON -->
+    <div class="l-ribbon">
+      <div class="l-rib-inner">
+        <div class="ritem"><div class="rnum">500+</div><div class="rlbl">Partner Institutions</div></div>
+        <div class="ritem"><div class="rnum">45K+</div><div class="rlbl">Active Students</div></div>
+        <div class="ritem"><div class="rnum">3.2K+</div><div class="rlbl">Courses Published</div></div>
+        <div class="ritem"><div class="rnum">98%</div><div class="rlbl">Parent Satisfaction</div></div>
+      </div>
     </div>
+
+    <!-- FEATURES -->
+    <section class="l-sec l-sec-alt" id="features">
+      <div class="l-con">
+        <div class="l-sh">
+          <div class="stag st-pu">✨ Platform Features</div>
+          <h2 class="l-h2">Everything your school needs</h2>
+          <p class="l-sp">From course creation to gamified quizzes, from messaging to analytics — one platform, zero hassle.</p>
+        </div>
+        <div class="feat-grid">
+          <div class="fcard fc-1 rv"><div class="fic" style="background:#eef4ff">🏫</div><h3>Smart Classrooms</h3><p>Virtual classrooms per group with sections, chapters and assignments. Launch from templates instantly.</p></div>
+          <div class="fcard fc-2 rv"><div class="fic" style="background:#f0e8ff">📚</div><h3>Course Templates</h3><p>Build reusable templates with PDFs, videos and audio. Copy to any classroom and save hours each week.</p></div>
+          <div class="fcard fc-3 rv"><div class="fic" style="background:#fff0f4">📝</div><h3>Assignments & Grading</h3><p>Create MCQ, open-response and file submissions. Distribute, collect, grade and give personalized feedback.</p></div>
+          <div class="fcard fc-4 rv"><div class="fic" style="background:#fff5ef">📊</div><h3>Grade & Attendance</h3><p>Real-time grades and absences. Parents notified instantly. Teachers add remarks per student per session.</p></div>
+          <div class="fcard fc-5 rv"><div class="fic" style="background:#fffbec">🎮</div><h3>Gamified Learning</h3><p>Interactive exercises by age group. Points, badges, levels and leaderboards keep every student motivated daily.</p></div>
+          <div class="fcard fc-6 rv"><div class="fic" style="background:#e6fdf8">💬</div><h3>Unified Messaging</h3><p>Teacher–parent DMs, class announcements, parent forums and real-time push notifications in one place.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ROLES -->
+    <section class="l-sec" id="roles">
+      <div class="l-con">
+        <div class="l-sh">
+          <div class="stag st-or">👥 Who It's For</div>
+          <h2 class="l-h2">A space for every role</h2>
+          <p class="l-sp">Four tailored experiences built around the real needs of everyone in the school ecosystem.</p>
+        </div>
+        <div class="roles-grid">
+          <div class="rcard rc-t rv">
+            <div class="rc-deco">📖</div>
+            <div class="rc-badge rc-badge-t">👩‍🏫 Teacher</div>
+            <h3>Course Creator</h3><p class="rc-sub">Academic Supervisor & Content Builder</p>
+            <ul class="rperks">
+              <li><span class="pdot pd-t"></span>Create courses with PDF, video, audio & text</li>
+              <li><span class="pdot pd-t"></span>Design MCQ, open-ended & file exercises</li>
+              <li><span class="pdot pd-t"></span>Record grades, absences & add remarks</li>
+              <li><span class="pdot pd-t"></span>Message parents & broadcast announcements</li>
+            </ul>
+          </div>
+          <div class="rcard rc-s rv">
+            <div class="rc-deco">🎓</div>
+            <div class="rc-badge rc-badge-s">🎓 Student</div>
+            <h3>Interactive Learner</h3><p class="rc-sub">Gamified Explorer & Knowledge Builder</p>
+            <ul class="rperks">
+              <li><span class="pdot pd-s"></span>Access structured courses by subject & session</li>
+              <li><span class="pdot pd-s"></span>Complete gamified exercises and earn XP</li>
+              <li><span class="pdot pd-s"></span>Unlock badges, level up & track progress</li>
+              <li><span class="pdot pd-s"></span>Submit homework & receive instant feedback</li>
+            </ul>
+          </div>
+          <div class="rcard rc-a rv">
+            <div class="rc-deco">⚙️</div>
+            <div class="rc-badge rc-badge-a">⚙️ Admin</div>
+            <h3>Institution Manager</h3><p class="rc-sub">Platform Operator & Analytics Hub</p>
+            <ul class="rperks">
+              <li><span class="pdot pd-a"></span>Create & manage all accounts and roles</li>
+              <li><span class="pdot pd-a"></span>Assign teachers to classes & subjects</li>
+              <li><span class="pdot pd-a"></span>Global dashboard: logins, activity & absences</li>
+              <li><span class="pdot pd-a"></span>Handle complaints & support tickets</li>
+            </ul>
+          </div>
+          <div class="rcard rc-p rv">
+            <div class="rc-deco">👨‍👩‍👧</div>
+            <div class="rc-badge rc-badge-p">👨‍👩‍👧 Parent</div>
+            <h3>Engaged Family</h3><p class="rc-sub">Progress Watcher & Community Member</p>
+            <ul class="rperks">
+              <li><span class="pdot pd-p"></span>View courses, exercises & homework</li>
+              <li><span class="pdot pd-p"></span>Monitor grades, absences & teacher remarks</li>
+              <li><span class="pdot pd-p"></span>Message teachers & join parent groups</li>
+              <li><span class="pdot pd-p"></span>Instant push notifications for everything</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- GAMIFICATION -->
+    <section class="l-sec l-sec-alt" id="gamif">
+      <div class="l-con">
+        <div class="gamif-inner">
+          <div class="gamif-vis rv">
+            <div class="orbit o2"></div>
+            <div class="orbit o1"></div>
+            <div class="big-badge">
+              <span class="bb-icon">🏆</span>
+              <strong>Level 5</strong>
+              <span>Math Master</span>
+            </div>
+            <div class="mb mb1">⭐ 1,250 XP</div>
+            <div class="mb mb2">🔥 7-day streak!</div>
+            <div class="mb mb3">🎯 Top 3 in class</div>
+            <div class="mb mb4">📚 12 badges</div>
+          </div>
+          <div class="rv">
+            <div class="stag st-ye">🎮 Gamified Learning</div>
+            <h2 class="l-h2" style="text-align:left">Learning that feels like play</h2>
+            <p class="l-sp" style="margin:0 0 28px;text-align:left">Engage every student with an adaptive reward system that turns each lesson into an achievement.</p>
+            <div class="gfeats">
+              <div class="gfeat"><div class="gfic" style="background:#fff0e6">🎯</div><div><h4>Points & XP system</h4><p>Earn XP for every exercise, quiz and lesson. Level up as you master the curriculum.</p></div></div>
+              <div class="gfeat"><div class="gfic" style="background:#f0e8ff">🥇</div><div><h4>Badges & achievements</h4><p>Unlock collectible badges for milestones — perfect scores, streaks and subject mastery.</p></div></div>
+              <div class="gfeat"><div class="gfic" style="background:#eef4ff">⚡</div><div><h4>Instant feedback</h4><p>Immediate responses after every answer with explanations that reinforce learning.</p></div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- HOW IT WORKS -->
+    <section class="l-sec" id="how">
+      <div class="l-con">
+        <div class="l-sh">
+          <div class="stag st-bl">🗺️ How It Works</div>
+          <h2 class="l-h2">Up and running in 4 steps</h2>
+          <p class="l-sp">From signup to a fully active digital school — faster than you think.</p>
+        </div>
+        <div class="steps-row">
+          <div class="step rv">
+            <div class="sball" style="background:linear-gradient(135deg,#E8F0FF,#C8DCFF);box-shadow:0 12px 32px rgba(26,143,227,.22)">🏫<div class="sn" style="color:#1A8FE3">Step 01</div></div>
+            <h4>Register your school</h4><p>Admin sets up institution, classes and groups in minutes</p>
+          </div>
+          <div class="step rv">
+            <div class="sball" style="background:linear-gradient(135deg,#F0E8FF,#DDD0FF);box-shadow:0 12px 32px rgba(102,16,242,.22)">👥<div class="sn" style="color:#6610F2">Step 02</div></div>
+            <h4>Add your team</h4><p>Invite teachers, enroll students, link parents instantly</p>
+          </div>
+          <div class="step rv">
+            <div class="sball" style="background:linear-gradient(135deg,#FFF3E8,#FFE4C8);box-shadow:0 12px 32px rgba(243,121,51,.22)">📚<div class="sn" style="color:#F37933">Step 03</div></div>
+            <h4>Build your content</h4><p>Create rich courses and launch classrooms from templates</p>
+          </div>
+          <div class="step rv">
+            <div class="sball" style="background:linear-gradient(135deg,#FFFCE8,#FFF4C0);box-shadow:0 12px 32px rgba(230,194,41,.3)">🚀<div class="sn" style="color:#8a6800">Step 04</div></div>
+            <h4>Teach & track</h4><p>Assign exercises, track progress and communicate in real time</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <div class="l-cta" id="cta">
+      <div class="l-cta-inner rv">
+        <div class="cta-tag">🚀 Start today — free setup</div>
+        <h2>Ready to transform your institution?</h2>
+        <p>Join 500+ schools delivering better education with EduSphere.</p>
+        <div class="cta-btns">
+          <a href="#" class="cta-w">Request a Free Demo 🎯</a>
+          <a href="#" class="cta-o">Contact Sales →</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="l-footer">
+      <div class="ft-grid">
+        <div>
+          <div class="l-logo" style="font-size:1.7rem">EduSphere</div>
+          <p class="ft-desc">The all-in-one platform connecting schools, teachers, students and parents.</p>
+          <div class="ft-dots">
+            <span class="ftd" style="background:#1A8FE3"></span>
+            <span class="ftd" style="background:#6610F2"></span>
+            <span class="ftd" style="background:#D11149"></span>
+            <span class="ftd" style="background:#F37933"></span>
+            <span class="ftd" style="background:#E6C229"></span>
+          </div>
+        </div>
+        <div class="ft-col"><h5>Platform</h5><a href="#">Classrooms</a><a href="#">Courses</a><a href="#">Gamification</a><a href="#">Messaging</a></div>
+        <div class="ft-col"><h5>For</h5><a href="#">Schools</a><a href="#">Teachers</a><a href="#">Students</a><a href="#">Parents</a></div>
+        <div class="ft-col"><h5>Company</h5><a href="#">About</a><a href="#">Pricing</a><a href="#">Blog</a><a href="#">Contact</a></div>
+      </div>
+      <div class="ft-bot">
+        <div>© 2026 EduSphere. Made with ❤️ for education.</div>
+        <div class="ft-links"><a href="#">Terms</a><a href="#">Privacy</a></div>
+      </div>
+    </footer>
+
   </div>
 
   <script type="module" src="src/main.js"></script>

@@ -34,8 +34,25 @@ function goToLanding() {
   const landing = document.getElementById("landing-page");
 
   intro?.classList.add("fade-out");
-
   landing?.classList.add("visible");
+
+  setTimeout(() => {
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((e) => {
+          if (e.isIntersecting) {
+            e.target.classList.add("in");
+            io.unobserve(e.target);
+          }
+        });
+      },
+      { threshold: 0.12 },
+    );
+    document.querySelectorAll(".rv").forEach((el, i) => {
+      el.style.transitionDelay = (i % 4) * 80 + "ms";
+      io.observe(el);
+    });
+  }, 500);
 }
 
 window.__goToLanding = goToLanding;
