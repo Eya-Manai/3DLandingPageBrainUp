@@ -7,6 +7,7 @@ import { Ground } from "./world/ground.js";
 import { School } from "./world/school.js";
 import { Environment } from "./world/environement.js";
 import { Sky } from "./world/sky.js";
+import { SoundManager } from "./audios/soundManager.js";
 
 import { Mascot } from "./characters/mascot.js";
 import { CharacterController } from "./characters/characterController.js";
@@ -19,6 +20,7 @@ renderer.shadowMap.type = THREE.PCFShadowMap;
 const scene = createScene();
 const camera = createCamera();
 const sky = new Sky(scene);
+const soundManager = new SoundManager(camera, sky);
 new Ground(scene);
 new School(scene);
 new Environment(scene);
