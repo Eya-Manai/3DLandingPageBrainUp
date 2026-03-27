@@ -18,29 +18,51 @@ body{font-family:'Nunito',sans-serif;background:#FFFDF8;color:#0D1B2A;overflow-x
   z-index: 1;
 }
 .dialog {
-  position: fixed;
-  bottom: 20px;
-  left: 50%;
-  transform: translateX(-50%) translateY(20px);
+  position: absolute;
+  top: 0;
+  left: 0;
 
-  background: white;
-  color: black;
-  padding: 14px 22px;
-  border-radius: 12px;
+  background: #fff;
+  color: #222;
+  padding: 14px 18px;
+  border-radius: 50px ;
 
+  font-family: "Nunito", sans-serif;
+  font-weight: 800;
+  font-size: 15px;
+
+  box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+
+  transform: translate(-50%, -120%) scale(0.8);
   opacity: 0;
-  transition: all 0.4s ease;
+  transition: all 0.25s ease;
 
   z-index: 9999;
-  pointer-events: none;
-}
-.dialog.visible {
-  opacity: 1;
-  transform: translateX(-50%) translateY(0);
 }
 
-.hidden {
-  opacity: 0;
+.dialog::after {
+  content: "";
+  position: absolute;
+  bottom: -8px;
+  left: 50%;
+  transform: translateX(-50%) rotate(45deg);
+
+  width: 14px;
+  height: 14px;
+  background: white;
+}
+
+.dialog.visible {
+  opacity: 1;
+  transform: translate(-50%, -120%) scale(1);
+  animation: floaty 2s ease-in-out infinite;
+
+}
+
+
+@keyframes floaty {
+  0%,100% { transform: translate(-50%, -120%) scale(1); }
+  50% { transform: translate(-50%, -130%) scale(1.03); }
 }
 #skip-btn{
   position:absolute;top:20px;right:20px;z-index:20;

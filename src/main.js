@@ -43,6 +43,21 @@ function showIntroDialog() {
     dialog.classList.remove("visible");
   }, 5000);
 }
+function updateDialogPosition() {
+  const dialog = document.getElementById("intro-dialog");
+  if (!dialog || !mascot.model) return;
+
+  const pos = mascot.group.position.clone();
+  pos.y += 4;
+
+  pos.project(camera);
+
+  const x = (pos.x * 0.5 + 0.5) * window.innerWidth;
+  const y = (-pos.y * 0.5 + 0.5) * window.innerHeight;
+
+  dialog.style.left = `${x}px`;
+  dialog.style.top = `${y}px`;
+}
 
 function goToLanding() {
   const intro = document.getElementById("intro-screen");
@@ -76,7 +91,9 @@ async function init() {
   await mascot.load();
   mascot.group.position.set(0, 0, 6);
   controller.playWaveIntro();
-  showIntroDialog();
+  setTimeout(() => {
+    showIntroDialog();
+  }, 800);
   animate();
 }
 
@@ -91,6 +108,7 @@ function animate() {
 
   controller.update(delta);
   mascot.update(delta);
+  updateDialogPosition();
 
   renderer.render(scene, camera);
 }

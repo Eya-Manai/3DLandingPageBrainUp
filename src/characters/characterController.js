@@ -87,6 +87,7 @@ export class CharacterController {
       this.#keys["ArrowRight"];
 
     if (moving) {
+      document.getElementById("intro-dialog")?.classList.remove("visible");
       if (this.#waving) {
         this.#waving = false;
       }
@@ -134,7 +135,7 @@ export class CharacterController {
         this.#waving = false;
         this.#play("idle");
       }
-    }, 5000);
+    }, 7000);
   }
   #checkDoor() {
     if (this.#doorTriggered) return;
