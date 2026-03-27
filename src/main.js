@@ -89,7 +89,7 @@ window.__goToLanding = goToLanding;
 
 async function init() {
   await mascot.load();
-  mascot.group.position.set(0, 0, 6);
+  mascot.group.position.set(0, 0, 12);
   controller.playWaveIntro();
   setTimeout(() => {
     showIntroDialog();
