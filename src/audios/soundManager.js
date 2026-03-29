@@ -11,4 +11,11 @@ export class SoundManager {
       autoplay: true,
     });
   }
+  unlockAndPlay() {
+    const listener = this.soundEngine.listener;
+    listener.context.resume().then(() => {
+      this.soundEngine.play("wind");
+      this.soundEngine.play("birds");
+    });
+  }
 }

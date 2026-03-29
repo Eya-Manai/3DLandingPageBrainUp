@@ -21,6 +21,18 @@ const scene = createScene();
 const camera = createCamera();
 const sky = new Sky(scene);
 const soundManager = new SoundManager(camera, sky);
+
+// Unlock audio on first user interaction
+function unlockAudio() {
+  // Remove listeners after first click/key
+  window.removeEventListener("click", unlockAudio);
+
+  // Resume Web Audio context and play sounds
+  soundManager.unlockAndPlay();
+}
+
+// Listen for first interaction
+window.addEventListener("click", unlockAudio, { once: true });
 new Ground(scene);
 new School(scene);
 new Environment(scene);
@@ -45,7 +57,7 @@ function showIntroDialog() {
 
   setTimeout(() => {
     dialog.classList.remove("visible");
-  }, 5000);
+  }, 100000);
 }
 function updateDialogPosition() {
   const dialog = document.getElementById("intro-dialog");
