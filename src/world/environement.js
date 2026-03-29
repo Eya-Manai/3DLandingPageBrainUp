@@ -52,7 +52,7 @@ export class Environment {
     ];
 
     positions.forEach(([x, z]) => {
-      const count = 8 + Math.floor(Math.random() * 8);
+      const count = 20 + Math.floor(Math.random() * 20);
       this.objects.push(new FlowerBed(this.scene, x, z, count));
     });
   }

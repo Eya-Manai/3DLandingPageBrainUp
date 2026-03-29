@@ -38,7 +38,7 @@ export class School {
   buildRoof() {
     const slab = new THREE.Mesh(
       new THREE.BoxGeometry(23, 0.8, 11),
-      mat(0x5b7cff, 0.5, 0.1),
+      mat(0xf37933, 0.5, 0.1),
     );
     slab.position.y = 9.5;
     slab.castShadow = true;
@@ -46,7 +46,7 @@ export class School {
 
     const peak = new THREE.Mesh(
       new THREE.CylinderGeometry(0, 5, 3, 4),
-      mat(0x5b7cff, 0.5, 0.1),
+      mat(0xf37933, 0.5, 0.1),
     );
     peak.rotation.y = DEG(45);
     peak.position.y = 11.3;
@@ -87,20 +87,76 @@ export class School {
   }
 
   buildDoor() {
+    const FRAME = 0xf4e7c5;
+    const DOOR = 0xf37933;
+    const DARK = 0x2c3e50;
+
     const door = new THREE.Mesh(
-      new THREE.BoxGeometry(2.2, 3.5, 0.15),
-      mat(0x5b7cff, 0.8),
+      new THREE.BoxGeometry(2.4, 3.8, 0.2, 6, 6, 6),
+      new THREE.MeshStandardMaterial({
+        color: DOOR,
+        roughness: 0.4,
+        metalness: 0.1,
+      }),
     );
-    door.position.set(0, 1.75, 5.075);
+    door.position.set(0, 1.9, 5.1);
     this.group.add(door);
 
-    const arch = new THREE.Mesh(
-      new THREE.TorusGeometry(1.2, 0.18, 8, 24, Math.PI),
-      mat(0xede0c0, 0.6),
+    const glass = new THREE.Mesh(
+      new THREE.BoxGeometry(1.4, 1.4, 0.08),
+      new THREE.MeshStandardMaterial({
+        color: 0xaee3ff,
+        transparent: true,
+        opacity: 0.7,
+        roughness: 0.05,
+        metalness: 0.2,
+        emissive: 0xaee3ff,
+        emissiveIntensity: 0.4,
+      }),
     );
-    arch.rotation.z = DEG(180);
-    arch.position.set(0, 3.5, 5.04);
-    this.group.add(arch);
+    glass.position.set(0, 2.8, 5.22);
+    this.group.add(glass);
+
+    const hBar = new THREE.Mesh(
+      new THREE.BoxGeometry(1.4, 0.08, 0.1),
+      new THREE.MeshStandardMaterial({ color: DARK }),
+    );
+    hBar.position.set(0, 2.8, 5.25);
+    this.group.add(hBar);
+
+    const vBar = new THREE.Mesh(
+      new THREE.BoxGeometry(0.08, 1.4, 0.1),
+      new THREE.MeshStandardMaterial({ color: DARK }),
+    );
+    vBar.position.set(0, 2.8, 5.25);
+    this.group.add(vBar);
+
+    const frame = new THREE.Mesh(
+      new THREE.BoxGeometry(2.8, 4.2, 0.15, 6, 6, 6),
+      new THREE.MeshStandardMaterial({
+        color: FRAME,
+        roughness: 0.6,
+      }),
+    );
+    frame.position.set(0, 2.1, 5.0);
+    this.group.add(frame);
+
+    // ── Simple handle (minimalist) ────────────────
+    const handle = new THREE.Mesh(
+      new THREE.SphereGeometry(0.12, 16, 16),
+      new THREE.MeshStandardMaterial({
+        color: DARK,
+        roughness: 0.3,
+        metalness: 0.5,
+      }),
+    );
+    handle.position.set(0.9, 1.7, 5.25);
+    this.group.add(handle);
+
+    // ── Soft glow (cartoon vibe) ──────────────────
+    const light = new THREE.PointLight(0xaee3ff, 0.6, 5);
+    light.position.set(0, 2.8, 4.5);
+    this.group.add(light);
   }
 
   buildWindows() {
@@ -212,7 +268,7 @@ export class School {
 
     const roof = new THREE.Mesh(
       new THREE.CylinderGeometry(0, 1.8, 2, 4),
-      mat(0x5b7cff, 0.5),
+      mat(0xf37933, 0.5),
     );
     roof.rotation.y = DEG(45);
     roof.position.set(0, 15.3, 0);
@@ -306,7 +362,7 @@ export class School {
 
       const roof = new THREE.Mesh(
         new THREE.BoxGeometry(6.5, 0.5, 8.5),
-        mat(0x5b7cff, 0.5, 0.1),
+        mat(0xf37933, 0.5, 0.1),
       );
       roof.position.set(side * 14, 7.25, 0);
       roof.castShadow = true;
